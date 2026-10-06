@@ -112,8 +112,7 @@ Els colors i temes es poden modificar editant les variables CSS:
 ## 🤝 Contribucions
 
 Per a suggerencies de millora o reportar errors, contacta amb:
-- **Professor**: [email del professor]
-- **Departament d'Informàtica**: IES [nom de l'institut]
+- **Professor**: Ximo Tur - IES Sant Vicent Ferrer - València
 
 ## 📄 Llicència
 
