@@ -631,7 +631,14 @@ button.chip-b { cursor: pointer; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25); }
   var R = {
     scratch: { t: "Scratch", u: "https://scratch.mit.edu", l: "ca", d: "Editor i tutorials integrats en català. Canvia l'idioma amb la icona del globus, a dalt." },
     scratchIdeas: { t: "Idees de Scratch", u: "https://scratch.mit.edu/ideas", l: "ca", d: "Tutorials guiats i targetes d'activitats oficials. Posa l'idioma en català." },
-    scratchBcn: { t: "Fitxes de Scratch Barcelona", u: "https://scratch.barcelona/exercicis/", l: "ca", d: "7 fitxes per a fer jocs: persecucions, vides i Game Over, laberints, qüestionaris..." },
+    scratchCards: { t: "Targetes de Scratch 3.0", u: "https://drive.google.com/file/d/1Ri61sKkoJwSt0azC1x2sTIp9GSHm0HS4/view", l: "ca", d: "Totes les targetes en català, en PDF. Cada targeta és un repte curt: tria'n una, fes-la a Scratch i passa a la següent." },
+    rpiLost: { t: "Perdidos en el espacio", u: "https://projects.raspberrypi.org/es-LA/projects/lost-in-space", l: "es", d: "Raspberry Pi, Scratch nivell 1. La primera animació pas a pas: ideal si no has programat mai." },
+    rpiBalloons: { t: "Globos", u: "https://projects.raspberrypi.org/es-LA/projects/balloons", l: "es", d: "Raspberry Pi, Scratch nivell 1. Un joc de rebentar globus: moviment, clons i puntuació." },
+    rpiGhost: { t: "Cazafantasmas", u: "https://projects.raspberrypi.org/es-LA/projects/ghostbusters", l: "es", d: "Raspberry Pi, Scratch nivell 1. Un joc d'atrapar fantasmes amb temps i punts." },
+    rpiFlappy: { t: "El papagayo Plumita", u: "https://projects.raspberrypi.org/es-LA/projects/flappy-parrot", l: "es", d: "Raspberry Pi, Scratch nivell 2. Un joc tipus Flappy Bird amb obstacles que es mouen." },
+    rpiDodge: { t: "Quemados", u: "https://projects.raspberrypi.org/es-LA/projects/dodgeball", l: "es", d: "Raspberry Pi, Scratch nivell 2. Un joc de plataformes: salts, gravetat i nivells." },
+    rpiSnow: { t: "Guerra de nieve", u: "https://projects.raspberrypi.org/es-LA/projects/snowball-fight", l: "es", d: "Raspberry Pi, Scratch nivell 2. Llançar boles de neu a un blanc." },
+    rpiCatalog: { t: "Tots els projectes de Scratch de Raspberry Pi", u: "https://projects.raspberrypi.org/es-LA/projects?software%5B%5D=scratch", l: "es", d: "Catàleg complet en castellà, ordenat per nivells (1, 2 i 3). Quan acabes un, tria'n un altre." },
     arcade: { t: "Editor de MakeCode Arcade", u: "https://arcade.makecode.com", l: "es", d: "Segueix els tutorials que hi trobaràs. Posa'l en castellà: ⚙️ → Language → Español. Per al codi, canvia de Blocs a JavaScript o Python a dalt." },
     arcadeTut: { t: "Tutorials de MakeCode Arcade", u: "https://arcade.makecode.com/tutorials", l: "en", d: "Segueix els tutorials pas a pas, dins del mateix editor (15-20 minuts cadascun). Recorda posar-lo en castellà." },
     arcadeMaps: { t: "Skillmaps de MakeCode Arcade", u: "https://arcade.makecode.com/skillmaps", l: "en", d: "Itineraris més llargs, encara en blocs, que acaben amb un joc complet. Recorda posar-lo en castellà." },
@@ -722,7 +729,8 @@ button.chip-b { cursor: pointer; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25); }
       if (entry === "e2") groups.push({ h: "Per a començar", items: ["arcadeMaps", "arcadeNext", "arcade"] });
       if (entry === "e3") groups.push({ h: "Per a començar", items: ["arcade", "arcadeNext"] });
       groups.push({ h: entry === "gd" ? "Per a començar" : "Quan arribes a GDevelop", items: ["gdevelopEs", "gdevelopAcademy", "gdevelopWiki"] });
-      if (level === "novell") groups.unshift({ h: "Si vols escalfar abans amb Scratch", items: ["scratch", "scratchBcn"] });
+      if (level === "poc") groups.unshift({ h: "Per a reforçar els blocs amb Scratch", items: ["scratchCards", "rpiFlappy", "rpiDodge", "rpiSnow", "rpiCatalog"] });
+      if (level === "novell") groups.unshift({ h: "Si vols escalfar abans amb Scratch", items: ["scratch", "scratchCards", "rpiLost", "rpiBalloons", "rpiGhost"] });
       p.blocks.push({ type: "res", groups: groups });
 
       var layers = [LAYER_UPSTEAM];
@@ -747,13 +755,17 @@ button.chip-b { cursor: pointer; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25); }
       } else {
         p.intro = "Comences amb Scratch per a agafar-li el gust, després proves MakeCode Arcade i, abans de triar, fas una setmana de tastet amb robots i IA.";
         p.blocks.push({ type: "steps", title: "Què faràs", items: [
-          "Scratch: primers passos amb els tutorials i les fitxes en català.",
+          level === "poc"
+            ? "Scratch: reforça els blocs amb les targetes de Scratch 3.0 i els projectes de nivell 2 de Raspberry Pi."
+            : "Scratch: primers passos amb les targetes de Scratch 3.0 i els projectes de nivell 1 de Raspberry Pi.",
           "MakeCode Arcade, Etapa 1: segueix els tutorials curts en blocs.",
           "Una setmana de tastet: el robot Maqueen Lite i un taller per a traure-li suc a la IA.",
           "Tria el camí que més t'haja agradat i torna a fer el test."
         ] });
         p.blocks.push({ type: "res", groups: [
-          { h: "Scratch", items: ["scratch", "scratchIdeas", "scratchBcn"] },
+          { h: "Scratch", items: level === "poc"
+            ? ["scratch", "scratchCards", "rpiFlappy", "rpiDodge", "rpiCatalog"]
+            : ["scratch", "scratchIdeas", "scratchCards", "rpiLost", "rpiBalloons", "rpiCatalog"] },
           { h: "MakeCode Arcade", items: ["arcadeTut", "arcade"] }
         ] });
       }
@@ -860,7 +872,7 @@ button.chip-b { cursor: pointer; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25); }
         "Programar un videojoc propi, amb vista a Upsteam."
       ] });
       p.blocks.push({ type: "res", groups: [
-        { h: "Per a preparar-te", items: ["scratch", "scratchIdeas", "scratchBcn", "arcadeTut", "arcadeMaps"] }
+        { h: "Per a preparar-te", items: ["scratch", "scratchIdeas", "scratchCards", "rpiCatalog", "arcadeTut", "arcadeMaps"] }
       ] });
       p.blocks.push({ type: "note", html: "<strong>No eres de 2n de Batxillerat?</strong> Esta opció és només per a 2n. Torna arrere i tria un altre objectiu." });
       return p;
